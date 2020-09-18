@@ -36,6 +36,7 @@ const Slideshow = ({ images }) => {
       return (
         <div
           className={`pagination-dot ${isActive ? 'pagination-dot--active' : ''}`}
+          onClick={() => setCurrentImage(img)}
           key={i}
         />
       );
