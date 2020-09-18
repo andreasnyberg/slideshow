@@ -28,20 +28,39 @@ const Slideshow = ({ images }) => {
 
     setCurrentImage(images[newIndex]);
   };
+  
+  const renderPagination = () => (
+    images.map((img, i) => {
+      const isActive = img.src === currentImage.src;
 
-  const renderCurrentImage = () => (
-    <img
-      className="image"
-      src={currentImage.src}
-      alt={currentImage.alt}
-    />
+      return (
+        <div
+          className={`pagination-dot ${isActive ? 'pagination-dot--active' : ''}`}
+          key={i}
+        />
+      );
+    })
   );
 
   return (
-    <div className="slideshow">
-      <ButtonPrev onPrevClick={handlePrevClick} />
-      { renderCurrentImage() }
-      <ButtonNext onNextClick={handleNextClick} />
+    <div className="slideshow-container">
+      <div className="slideshow">
+        <ButtonPrev onPrevClick={handlePrevClick} />
+
+        <div className="image-container">
+          <img
+            className="image"
+            src={currentImage.src}
+            alt={currentImage.alt}
+          />
+        </div>
+
+        <ButtonNext onNextClick={handleNextClick} />
+      </div>
+
+      <div className="pagination">
+        { renderPagination() }
+      </div>
     </div>
   );
 };
